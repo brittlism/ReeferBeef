@@ -8833,7 +8833,7 @@ BfObjectCreateExpression* BfReducer::CreateObjectCreateExpression(BfAstNode* all
 
 		// Note- if there WERE an LBracket here then we'd have an 'isArray' case. We pass this in here for
 		// error display purposes
-		tokenNode = ExpectTokenAfter(objectCreateExpr, BfToken_LParen, BfToken_LBracket);
+		tokenNode = ExpectTokenAfter(objectCreateExpr, BfToken_LParen, BfToken_LBracket, false);
 		if (tokenNode == NULL)
 			return objectCreateExpr;
 	}

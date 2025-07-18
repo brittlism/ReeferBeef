@@ -9930,7 +9930,7 @@ BfAstNode* BfReducer::CreateTopLevelObject(BfTokenNode* tokenNode, BfAttributeDi
 	return NULL;
 }
 
-BfTokenNode* BfReducer::ExpectTokenAfter(BfAstNode* node, BfToken token)
+BfTokenNode* BfReducer::ExpectTokenAfter(BfAstNode* node, BfToken token, bool error)
 {
 	if (!AssertCurrentNode(node))
 		return NULL;
@@ -9939,14 +9939,15 @@ BfTokenNode* BfReducer::ExpectTokenAfter(BfAstNode* node, BfToken token)
 	if ((tokenNode == NULL) ||
 		(tokenNode->GetToken() != token))
 	{
-		FailAfter(StrFormat("Expected '%s'", BfTokenToString(token)), node);
+		if (error)
+			FailAfter(StrFormat("Expected '%s'", BfTokenToString(token)), node);
 		return NULL;
 	}
 	mVisitorPos.MoveNext();
 	return tokenNode;
 }
 
-BfTokenNode* BfReducer::ExpectTokenAfter(BfAstNode* node, BfToken tokenA, BfToken tokenB)
+BfTokenNode* BfReducer::ExpectTokenAfter(BfAstNode* node, BfToken tokenA, BfToken tokenB, bool error)
 {
 	if (!AssertCurrentNode(node))
 		return NULL;
@@ -9955,14 +9956,15 @@ BfTokenNode* BfReducer::ExpectTokenAfter(BfAstNode* node, BfToken tokenA, BfToke
 	if ((tokenNode == NULL) ||
 		((tokenNode->GetToken() != tokenA) && (tokenNode->GetToken() != tokenB)))
 	{
-		FailAfter(StrFormat("Expected '%s' or '%s'", BfTokenToString(tokenA), BfTokenToString(tokenB)), node);
+		if (error)
+			FailAfter(StrFormat("Expected '%s' or '%s'", BfTokenToString(tokenA), BfTokenToString(tokenB)), node);
 		return NULL;
 	}
 	mVisitorPos.MoveNext();
 	return tokenNode;
 }
 
-BfTokenNode* BfReducer::ExpectTokenAfter(BfAstNode* node, BfToken tokenA, BfToken tokenB, BfToken tokenC)
+BfTokenNode* BfReducer::ExpectTokenAfter(BfAstNode* node, BfToken tokenA, BfToken tokenB, BfToken tokenC, bool error)
 {
 	if (!AssertCurrentNode(node))
 		return NULL;
@@ -9975,14 +9977,15 @@ BfTokenNode* BfReducer::ExpectTokenAfter(BfAstNode* node, BfToken tokenA, BfToke
 	if ((tokenNode == NULL) ||
 		((token != tokenA) && (token != tokenB) && (token != tokenC)))
 	{
-		FailAfter(StrFormat("Expected '%s', '%s', or '%s'", BfTokenToString(tokenA), BfTokenToString(tokenB), BfTokenToString(tokenC)), node);
+		if (error)
+			FailAfter(StrFormat("Expected '%s', '%s', or '%s'", BfTokenToString(tokenA), BfTokenToString(tokenB), BfTokenToString(tokenC)), node);
 		return NULL;
 	}
 	mVisitorPos.MoveNext();
 	return tokenNode;
 }
 
-BfTokenNode* BfReducer::ExpectTokenAfter(BfAstNode* node, BfToken tokenA, BfToken tokenB, BfToken tokenC, BfToken tokenD)
+BfTokenNode* BfReducer::ExpectTokenAfter(BfAstNode* node, BfToken tokenA, BfToken tokenB, BfToken tokenC, BfToken tokenD, bool error)
 {
 	if (!AssertCurrentNode(node))
 		return NULL;
@@ -9994,7 +9997,8 @@ BfTokenNode* BfReducer::ExpectTokenAfter(BfAstNode* node, BfToken tokenA, BfToke
 	if ((tokenNode == NULL) ||
 		((token != tokenA) && (token != tokenB) && (token != tokenC) && (token != tokenD)))
 	{
-		FailAfter(StrFormat("Expected '%s', '%s', '%s', or '%s'", BfTokenToString(tokenA), BfTokenToString(tokenB), BfTokenToString(tokenC), BfTokenToString(tokenD)), node);
+		if (error)
+			FailAfter(StrFormat("Expected '%s', '%s', '%s', or '%s'", BfTokenToString(tokenA), BfTokenToString(tokenB), BfTokenToString(tokenC), BfTokenToString(tokenD)), node);
 		return NULL;
 	}
 	mVisitorPos.MoveNext();
